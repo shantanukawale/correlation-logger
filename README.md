@@ -1,14 +1,37 @@
 
-#  Stores Logger
+# Stores Logger
 
-  
+Stores logger is custom logger written to manage all types of logs in store microservices.
+
+## Setup
+
+### Add  variable in '.env' file in root of your service
+
+```
+STORE_APP_NAME=your-app-name
+ENV=production
+```
+
+Other supported `ENV`s are test, staging, development.
+
+### Auto request & response logging
 
 Add the below lines to the microservice's server file ("app" in the code is an implied reference to an instance of Express()):  
->const {logger} = require("./stores-logger/logger");  
-const storesLogger = require("./stores-logger");  
-//logger code to log request and response body.  
-storesLogger(app);  
-//logger.info("xyz") logs text with correlation id.
 
-Install the following node modules:  
->npm install uuid cls-hooked winston morgan --save
+```javascript
+const storesLogger = require("./stores-logger");  
+
+storesLogger(app);  
+```
+
+### Custom logger to logs (info, error etc)
+
+```javascript
+const { logger } = require("./stores-logger/logger");  
+
+// To log information
+logger.info("xyz");
+
+// to log error
+logger.error("some-error");
+```
