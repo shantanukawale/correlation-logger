@@ -2,7 +2,8 @@
 
 // For formatting date in appropriate timezone;
 const moment = require('moment-timezone');
-
+const {requestLoggingMiddleware} = require("./request_logging_middleware");  
+const {correlationIdMiddleware} = require("./correlation_id_middleware");
 morgan.format = format;
 morgan.token = token;
 
@@ -184,6 +185,8 @@ function bodyToString(maxBodyLength, prettify, prependStr, body, bodyActionColor
 }
 
 module.exports = function morganBody(app, options) {
+  app.use(correlationIdMiddleware);  
+  app.use(requestLoggingMiddleware);  
   // default options
   options = options || {};
   var maxBodyLength = options.hasOwnProperty('maxBodyLength') ? options.maxBodyLength : 10000;
