@@ -1,0 +1,37 @@
+{
+  
+  "author": {
+    "name": "Shantanu Kawale",
+    "email": "shantanu@xoxoday.com"
+  },
+  "dependencies": {
+    "moment-timezone": "^0.5.13",
+    "on-finished": "^2.3.0",
+    "on-headers": "^1.0.1"
+  },
+  "deprecated": false,
+  "description": "xoxo morgan logging req, res, and body with request headers and xoxo-correlation-id",
+  "devDependencies": {
+    "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0",
+    "supertest": "^3.1.0",
+    "universal-stream-test": "^1.0.0"
+  },
+  "homepage": "https://github.com/sirrodgepodge/morgan-body#readme",
+  "keywords": [
+    "morgan",
+    "express",
+    "logging",
+    "logger"
+  ],
+  "license": "GPL-3.0",
+  "main": "index.js",
+  "name": "xoxo_reqreslogger",
+  
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
+
