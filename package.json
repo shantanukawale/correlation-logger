@@ -1,13 +1,17 @@
 {
-  
   "author": {
     "name": "Shantanu Kawale",
     "email": "shantanu@xoxoday.com"
   },
   "dependencies": {
+    "app-root-path": "^3.0.0",
+    "cls-hooked": "^4.2.2",
+    "dotenv": "^8.2.0",
     "moment-timezone": "^0.5.13",
     "on-finished": "^2.3.0",
-    "on-headers": "^1.0.1"
+    "on-headers": "^1.0.1",
+    "uuid": "^3.3.3",
+    "winston": "^3.2.1"
   },
   "deprecated": false,
   "description": "xoxo morgan logging req, res, and body with request headers and xoxo-correlation-id",
@@ -27,11 +31,9 @@
   ],
   "license": "GPL-3.0",
   "main": "index.js",
-  "name": "xoxo_reqreslogger",
-  
+  "name": "stores-logger",
   "version": "1.0.0",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
-

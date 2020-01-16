@@ -5,4 +5,4 @@ const logger = createLogger({
     getCorrelationId: correlationId.getId,
 });
 
-module.exports = {logger};
+module.exports = { logger };

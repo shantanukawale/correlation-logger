@@ -1,10 +1,15 @@
+
+const appRoot = require('app-root-path');
 const winston = require(`winston`);
 
+require('dotenv').config();
 function createLogger(opts = {}) {
     const {
         level = `info`,
         getCorrelationId,
         noCorrelationIdValue = `nocorrelation`,
+        appName = process.env.STORE_APP_NAME,
+        environment = process.env.ENV
     } = opts;
 
     return winston.createLogger({
@@ -17,7 +22,7 @@ function createLogger(opts = {}) {
             winston.format.errors({stack: true}),
             winston.format.colorize(),
             winston.format.printf(({timestamp, correlationId, level, message}) => {
-                return `${timestamp} (${correlationId}) - ${level}: ${message} `;
+                return `${appName} ${environment} ${timestamp} (${correlationId}) ${level}: ${message} `;
             })
         ),
         level,
@@ -30,4 +35,4 @@ function createLogger(opts = {}) {
     })
 }
 
-module.exports = {createLogger};
+module.exports = { createLogger };
