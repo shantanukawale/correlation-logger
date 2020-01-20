@@ -11,14 +11,24 @@ Stores logger is custom logger written to manage all types of logs in store micr
 npm install --save git+https://github.com/shantanukawale/stores-logger.git
 ```
 
-### Add  variable in '.env' file in root of your service
+### Add variable in '.env' file in root of your service
 
 ```
 STORE_APP_NAME=your-app-name
 ENV=production
 ```
 
+value STORE_APP_NAME should not contain spaces.
 Other supported `ENV`s are test, staging, development.
+
+### Create logs folder and put it in .gitignore
+
+```bash
+mkdir logs
+echo logs/ > .gitignore
+```
+
+It writes logs in `logs/combined.log`.
 
 ### Auto request & response logging
 

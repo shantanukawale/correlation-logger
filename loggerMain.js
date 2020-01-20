@@ -3,11 +3,12 @@ const appRoot = require('app-root-path');
 const winston = require(`winston`);
 
 require('dotenv').config();
+
 function createLogger(opts = {}) {
     const {
-        level = `info`,
+        level = "info",
         getCorrelationId,
-        noCorrelationIdValue = `nocorrelation`,
+        noCorrelationIdValue = "nocorrelation",
         appName = process.env.STORE_APP_NAME,
         environment = process.env.ENV
     } = opts;
@@ -20,16 +21,13 @@ function createLogger(opts = {}) {
             })(),
             winston.format.timestamp(),
             winston.format.errors({stack: true}),
-            winston.format.colorize(),
             winston.format.printf(({timestamp, correlationId, level, message}) => {
-                return `${appName} ${environment} ${timestamp} (${correlationId}) ${level}: ${message} `;
+                return `${appName} ${environment} ${timestamp} ${correlationId} ${level}: ${message}`;
             })
         ),
-        level,
+        level: level,
         transports: [
-            new winston.transports.Console({
-                handleExceptions: true,
-            }),
+            new winston.transports.File({ filename: appRoot+'/logs/combined.log' })
         ],
         exitOnError: false,
     })
