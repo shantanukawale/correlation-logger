@@ -22,6 +22,13 @@ function createLogger(opts = {}) {
             winston.format.timestamp(),
             winston.format.errors({stack: true}),
             winston.format.printf(({timestamp, correlationId, level, message}) => {
+                if((typeof message) == "object"){
+                    try{ 
+                        message = JSON.stringify(message);
+                    } catch(e){
+                        
+                    }
+                } 
                 return `${appName} ${environment} ${timestamp} ${correlationId} ${level}: ${message}`;
             })
         ),
