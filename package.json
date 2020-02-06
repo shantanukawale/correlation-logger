@@ -1,6 +1,6 @@
 {
   "author": {
-    "name": "Shantanu Kawale",
+    "name": "Plum Xoxoday",
     "email": "shantanu@xoxoday.com"
   },
   "dependencies": {
@@ -15,7 +15,7 @@
     "winston": "^3.2.1"
   },
   "deprecated": false,
-  "description": "xoxo morgan logging req, res, and body with request headers and xoxo-correlation-id",
+  "description": "A custom logger to log errors, info and each request response with correlationId",
   "devDependencies": {
     "body-parser": "^1.18.2",
     "chai": "^4.1.2",
@@ -32,8 +32,8 @@
   ],
   "license": "GPL-3.0",
   "main": "index.js",
-  "name": "stores-logger",
-  "version": "1.1.0",
+  "name": "correlation-logger",
+  "version": "0.1.0",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   }
