@@ -13,7 +13,7 @@ function createLogger(opts = {}) {
         environment = process.env.ENV
     } = opts;
 
-    return winston.createLogger({
+    const winstonLogger = winston.createLogger({
         format: winston.format.combine(
             winston.format((info) => {
                 info.correlationId = getCorrelationId() || noCorrelationIdValue;
@@ -22,13 +22,6 @@ function createLogger(opts = {}) {
             winston.format.timestamp(),
             winston.format.errors({stack: true}),
             winston.format.printf(({timestamp, correlationId, level, message}) => {
-                if((typeof message) == "object"){
-                    try{ 
-                        message = JSON.stringify(message);
-                    } catch(e){
-                        
-                    }
-                } 
                 return `${appName} ${environment} ${timestamp} ${correlationId} ${level}: ${message}`;
             })
         ),
@@ -38,6 +31,19 @@ function createLogger(opts = {}) {
         ],
         exitOnError: false,
     })
+
+    const wrapper = ( original ) => {
+        return (...args) => original(JSON.stringify(args));
+    };
+    
+    winstonLogger.error = wrapper(winstonLogger.error);
+    winstonLogger.warn = wrapper(winstonLogger.warn);
+    winstonLogger.info = wrapper(winstonLogger.info);
+    winstonLogger.verbose = wrapper(winstonLogger.verbose);
+    winstonLogger.debug = wrapper(winstonLogger.debug);
+    winstonLogger.silly = wrapper(winstonLogger.silly);
+
+    return winstonLogger;
 }
 
 module.exports = { createLogger };

@@ -48,8 +48,15 @@ requestLogger(app);
 const { logger } = require("correlation-logger/logger");  
 
 // To log information
-logger.info("xyz");
+logger.info("some useful", "information");
 
 // to log error
-logger.error("some-error");
+logger.error("some-error", "more info");
 ```
+
+Other supported methods are -
+
+- warn
+- verbose
+- debug
+- silly
