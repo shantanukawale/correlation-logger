@@ -299,14 +299,14 @@ module.exports = function morganBody(app, options) {
             formatString += `${logReqHeaderList[i]}=:req[${logReqHeaderList[i]}];`;
           }
           formatString += ']';
-          formatString+='xoxo-correlation-id: '+JSON.stringify(res.get('xoxo-correlation-id'));
+          formatString+='x-correlation-id: '+JSON.stringify(res.get('x-correlation-id'));
         }
       }
       if (logReqDateTime) formatString += ' ' + userAgentColor + 'at ' + dateColor + ':date';
       if (dateTimeFormat) formatString += `[${dateTimeFormat}]`;
       if (logReqDateTime && logReqUserAgent) formatString += ',';
       if (logReqUserAgent) formatString += ' ' + userAgentColor + 'User Agent: :user-agent' + defaultColor;
-      //formatString+=" xoxo-correlation-id: "+res.get('xoxo-correlation-id');
+      //formatString+=" x-correlation-id: "+res.get('x-correlation-id');
       fn = developmentFormatLine.func = compile(formatString);
     }
 
@@ -322,7 +322,7 @@ module.exports = function morganBody(app, options) {
     function logBodyGen(prependStr, getBodyFunc) {
       var bodyFormatName = 'bodyFmt_' + prependStr + morganBodyUseCounter;
       morgan.format(bodyFormatName, function logBody(_, req, res) {
-        const exPrependStr = '[' + getIDToken(req) + '] ' + prependStr+" xoxo-correlation-id: "+res.get('xoxo-correlation-id');
+        const exPrependStr = '[' + getIDToken(req) + '] ' + prependStr+" x-correlation-id: "+res.get('x-correlation-id');
         return bodyToString(maxBodyLength, prettify, exPrependStr, getBodyFunc(req, res), bodyActionColor, bodyColor, defaultColor);
       });
       return bodyFormatName;

@@ -3,7 +3,7 @@ const correlator = require(`./correlation_id`);
 
 module.exports = request.defaults({
     headers: {
-        get 'xoxo-correlation-id'() {
+        get 'x-correlation-id'() {
             return correlator.getId();
         },
     },
