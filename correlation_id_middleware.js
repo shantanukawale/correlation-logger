@@ -12,4 +12,4 @@ function correlationIdMiddleware(req, res, next) {
     }, req.get(`xoxo-correlation-id`));
 }
 
-module.exports = {correlationIdMiddleware};
+module.exports = { correlationIdMiddleware };

@@ -1,5 +1,5 @@
 const morgan = require(`morgan`);
-const {logger} = require(`./logger`);
+const { logger } = require(`./logger`);
 
 const morganConfig = {
     stream: {
@@ -12,4 +12,4 @@ const requestLoggingMiddleware = [
     morgan(`:method :status :url (:res[content-length] bytes) :response-time ms`, {...morganConfig, immediate: false}),
 ];
 
-module.exports = {requestLoggingMiddleware};
+module.exports = { requestLoggingMiddleware };
