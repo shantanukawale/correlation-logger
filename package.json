@@ -26,7 +26,7 @@
     "supertest": "^3.1.0",
     "universal-stream-test": "^1.0.0"
   },
-  "homepage": "https://github.com/shantanukawale/stores-logger#readme",
+  "homepage": "https://github.com/shantanukawale/correlation-logger#readme",
   "keywords": [
     "morgan",
     "express",
@@ -35,7 +35,14 @@
     "correlation-id",
     "correlation-logger",
     "correlation",
-    "logs"
+    "logs",
+    "request with correlation-id",
+    "request-promise with correlation-id",
+    "request-promise-native with correlation-id",
+    "request with correlation",
+    "request-promise with correlation",
+    "request-promise-native with correlation"
+
   ],
   "license": "GPL-3.0",
   "main": "index.js",

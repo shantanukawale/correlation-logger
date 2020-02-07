@@ -76,12 +76,12 @@ If you are using `request-promise-native` package. Use below wrapper for default
 
 ```javascript
 // It returns a wrapper around `request-promise-native` package with added default correlation-id header
-const request = require("correlation-logger/request-promise-native")
+const requestPromiseNative = require("correlation-logger/request-promise-native")
 ```
 
 Likewise to use wrapper of `request-promise` package. Use below wrapper
 
 ```javascript
 // It returns a wrapper around `request-promise` package with added default correlation-id header
-const request = require("correlation-logger/request-promise")
+const requestPromise = require("correlation-logger/request-promise")
 ```
