@@ -32,7 +32,9 @@ echo logs/ >> .gitignore
 
 It writes logs in `logs/combined.log`.
 
-### Auto request & response logging
+### How to use
+
+#### To log Request and Response
 
 Add the below lines to the microservice's server file ("app" in the code is an implied reference to an instance of Express()):  
 
@@ -42,7 +44,7 @@ const requestLogger = require("correlation-logger");
 requestLogger(app);  
 ```
 
-### Custom logger to logs (info, error etc)
+#### To add custom logging
 
 ```javascript
 const { logger } = require("correlation-logger/logger");  
@@ -60,3 +62,26 @@ Other supported methods are -
 - verbose
 - debug
 - silly
+
+#### To forward correlation-id in `request` and `request-promise`
+
+This is needed if you wanna track a request flowing through several microservices.
+
+```javascript
+// It returns a wrapper around `request` package with added default `correlation-id` header
+const request = require("correlation-logger/request")
+```
+
+If you are using `request-promise-native` package. Use below wrapper for default `correlation-id` header
+
+```javascript
+// It returns a wrapper around `request-promise-native` package with added default correlation-id header
+const request = require("correlation-logger/request-promise-native")
+```
+
+Likewise to use wrapper of `request-promise` package. Use below wrapper
+
+```javascript
+// It returns a wrapper around `request-promise` package with added default correlation-id header
+const request = require("correlation-logger/request-promise")
+```
