@@ -31,7 +31,11 @@
     "morgan",
     "express",
     "logging",
-    "logger"
+    "logger",
+    "correlation-id",
+    "correlation-logger",
+    "correlation",
+    "logs"
   ],
   "license": "GPL-3.0",
   "main": "index.js",
