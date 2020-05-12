@@ -2,7 +2,7 @@
 
 // For formatting date in appropriate timezone;
 const moment = require('moment-timezone');
-const {requestLoggingMiddleware} = require("./request_logging_middleware");  
+const { logger } = require(`./logger`);
 const {correlationIdMiddleware} = require("./correlation_id_middleware");
 morgan.format = format;
 morgan.token = token;
@@ -186,9 +186,15 @@ function bodyToString(maxBodyLength, prettify, prependStr, body, bodyActionColor
 
 module.exports = function morganBody(app, options) {
   app.use(correlationIdMiddleware);  
-  app.use(requestLoggingMiddleware);  
   // default options
-  options = options || {};
+  options = {
+    stream: {
+        write: (text) => logger.info(text.trim()),
+    },
+    noColors: true,
+    prettify: false
+  };
+  
   var maxBodyLength = options.hasOwnProperty('maxBodyLength') ? options.maxBodyLength : 10000;
   var logReqDateTime = options.hasOwnProperty('logReqDateTime') ? options.logReqDateTime : true;
   var logAllReqHeader = options.hasOwnProperty('logAllReqHeader') ? options.logAllReqHeader : true;
@@ -322,8 +328,7 @@ module.exports = function morganBody(app, options) {
     function logBodyGen(prependStr, getBodyFunc) {
       var bodyFormatName = 'bodyFmt_' + prependStr + morganBodyUseCounter;
       morgan.format(bodyFormatName, function logBody(_, req, res) {
-        const exPrependStr = '[' + getIDToken(req) + '] ' + prependStr+" x-correlation-id: "+res.get('x-correlation-id');
-        return bodyToString(maxBodyLength, prettify, exPrependStr, getBodyFunc(req, res), bodyActionColor, bodyColor, defaultColor);
+        return bodyToString(maxBodyLength, prettify, prependStr, getBodyFunc(req, res), bodyActionColor, bodyColor, defaultColor);
       });
       return bodyFormatName;
     }
@@ -369,7 +374,7 @@ module.exports = function morganBody(app, options) {
 
     if (!fn) {
       // compile
-      var formatString = actionColor + '[:id] ' + 'Response:' + ' ' + statusColor + ':status ' + responseTimeColor + ':response-time ms ';
+      var formatString = 'Response status:' + ' ' + statusColor + ':status time: ' + responseTimeColor + ':response-time ms ';
       if (logAllResHeader) {
         formatString += ' headers[:response-headers]' + defaultColor;
       } else {
